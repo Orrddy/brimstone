@@ -34,10 +34,12 @@ export default defineConfig({
     server: {
         host: 'lozand.local',
         cors: true,
-        https: {
-            key: fs.readFileSync('C:/laragon/etc/ssl/laragon.key'),
-            cert: fs.readFileSync('C:/laragon/etc/ssl/laragon.crt'),
-        },
+        https: fs.existsSync('C:/laragon/etc/ssl/laragon.key') && fs.existsSync('C:/laragon/etc/ssl/laragon.crt')
+            ? {
+                key: fs.readFileSync('C:/laragon/etc/ssl/laragon.key'),
+                cert: fs.readFileSync('C:/laragon/etc/ssl/laragon.crt'),
+              }
+            : false,
         watch: {
             ignored: ['**/storage/framework/views/**'],
         },

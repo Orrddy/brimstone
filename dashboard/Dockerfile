@@ -47,7 +47,6 @@ COPY composer.json composer.lock ./
 
 # Install PHP dependencies (production only)
 RUN composer install \
-    --no-dev \
     --no-interaction \
     --optimize-autoloader \
     --no-scripts \
@@ -58,13 +57,13 @@ COPY . .
 
 # Copy package.json and install node dependencies for asset compilation
 COPY package.json package-lock.json* ./
-RUN npm ci --ignore-scripts 2>/dev/null || npm install --ignore-scripts 2>/dev/null || true
+RUN npm ci || npm install
 
 # Build assets if vite config exists
-RUN if [ -f vite.config.js ]; then npm run build 2>/dev/null || true; fi
+RUN if [ -f vite.config.js ]; then npm run build; fi
 
 # Run post-install composer scripts now
-RUN composer run-script post-autoload-dump 2>/dev/null || true
+RUN composer run-script post-autoload-dump
 
 # Set permissions
 RUN mkdir -p storage/framework/{sessions,views,cache} \
