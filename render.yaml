@@ -29,7 +29,7 @@ services:
   - type: web
     name: brimstone-dashboard
     env: docker
-    dockerfilePath: dashboard/Dockerfile
+    dockerfilePath: Dockerfile
     dockerContext: ./dashboard
     plan: starter
     autoDeploy: true
