@@ -60,8 +60,11 @@ return [
             'engine' => null,
             'timezone' => '+00:00',
             'options' => extension_loaded('pdo_mysql') ? array_filter([
-                (PHP_VERSION_ID >= 80500 ? \Pdo\Mysql::ATTR_SSL_CA : \PDO::MYSQL_ATTR_SSL_CA) => env('MYSQL_ATTR_SSL_CA'),
-            ]) : [],
+                (PHP_VERSION_ID >= 80500 ? \Pdo\Mysql::ATTR_SSL_CA : \PDO::MYSQL_ATTR_SSL_CA) => env('MYSQL_ATTR_SSL_CA') ?: env('DB_SSL_CA'),
+                \PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => env('DB_SSL_VERIFY') !== null ? (filter_var(env('DB_SSL_VERIFY'), FILTER_VALIDATE_BOOLEAN)) : null,
+            ], function ($value) {
+                return $value !== null;
+            }) : [],
         ],
 
         'mariadb' => [
@@ -80,8 +83,11 @@ return [
             'strict' => true,
             'engine' => null,
             'options' => extension_loaded('pdo_mysql') ? array_filter([
-                (PHP_VERSION_ID >= 80500 ? \Pdo\Mysql::ATTR_SSL_CA : \PDO::MYSQL_ATTR_SSL_CA) => env('MYSQL_ATTR_SSL_CA'),
-            ]) : [],
+                (PHP_VERSION_ID >= 80500 ? \Pdo\Mysql::ATTR_SSL_CA : \PDO::MYSQL_ATTR_SSL_CA) => env('MYSQL_ATTR_SSL_CA') ?: env('DB_SSL_CA'),
+                \PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => env('DB_SSL_VERIFY') !== null ? (filter_var(env('DB_SSL_VERIFY'), FILTER_VALIDATE_BOOLEAN)) : null,
+            ], function ($value) {
+                return $value !== null;
+            }) : [],
         ],
 
         'pgsql' => [

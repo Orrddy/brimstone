@@ -65,6 +65,8 @@ services:
         sync: false
       - key: DB_SSL_CA
         sync: false
+      - key: DB_SSL_VERIFY
+        value: "false"
       # Session & Cache
       - key: SESSION_DRIVER
         value: file
