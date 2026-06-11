@@ -29,8 +29,8 @@ services:
   - type: web
     name: brimstone-dashboard
     env: docker
-    dockerfilePath: Dockerfile
-    dockerContext: ./dashboard
+    rootDir: dashboard
+    dockerfilePath: dashboard/Dockerfile
     plan: starter
     autoDeploy: true
     pullRequestPreviewsEnabled: false
