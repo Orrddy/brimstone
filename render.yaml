@@ -30,7 +30,7 @@ services:
     name: brimstone-dashboard
     env: docker
     rootDir: dashboard
-    dockerfilePath: dashboard/Dockerfile
+    dockerfilePath: Dockerfile
     plan: starter
     autoDeploy: true
     pullRequestPreviewsEnabled: false
