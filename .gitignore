@@ -1,0 +1,35 @@
+# OS
+.DS_Store
+Thumbs.db
+*.log
+
+# Laravel / Dashboard
+dashboard/.env
+dashboard/.env.backup
+dashboard/.env.production
+dashboard/vendor/
+dashboard/node_modules/
+dashboard/public/build/
+dashboard/public/hot/
+dashboard/storage/*.key
+dashboard/storage/pail/
+dashboard/.phpunit.cache/
+dashboard/auth.json
+dashboard/.phpactor.json
+dashboard/.phpunit.result.cache
+
+# IDE
+.idea/
+.vscode/
+.fleet/
+.nova/
+.zed/
+
+# WordPress remnants (not needed for deployment)
+wp-content/uploads/
+wp-includes/
+wp-json/
+
+# Temp
+*.tmp
+*.bak

@@ -1,0 +1,35 @@
+@theme {
+    --color-primary-dark: #0a1628;
+    /* Deep Navy - BrimStone primary background */
+    --color-secondary-dark: #1a2744;
+    /* Navy 800 - Secondary surfaces */
+
+    /* BrimStone Gold Accents */
+    --color-accent-primary: #c9a84c;
+    /* Gold */
+    --color-accent-secondary: #b8932a;
+    /* Amber Gold */
+    --color-accent-glow: #d4af37;
+    /* Rich Gold */
+
+    --color-text-primary: #f8fafc;
+    /* Slate 50 - Primary text */
+    --color-text-secondary: #94a3b8;
+    /* Slate 400 - Secondary text */
+    --color-success: #10b981;
+    /* Emerald 500 */
+    --color-warning: #f59e0b;
+    /* Amber 500 */
+    --color-info: #3b82f6;
+    /* Blue 500 */
+    --color-error: #ef4444;
+    /* Red 500 */
+
+    /* BrimStone Typography */
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    --font-display: 'Playfair Display', ui-serif, serif;
+}

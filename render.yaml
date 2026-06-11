@@ -1,0 +1,98 @@
+# BrimStone Brokers — Render Blueprint
+# Deploys both the public static site and the Laravel dashboard
+
+services:
+  # ─────────────────────────────────────────
+  # Public Marketing Site (Static)
+  # ─────────────────────────────────────────
+  - type: web
+    name: brimstone-frontend
+    env: static
+    buildCommand: ""
+    staticPublishPath: .
+    pullRequestPreviewsEnabled: false
+    headers:
+      - path: /*
+        name: X-Frame-Options
+        value: SAMEORIGIN
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+    routes:
+      - type: rewrite
+        source: /app/*
+        destination: /404.html
+
+  # ─────────────────────────────────────────
+  # Laravel Dashboard (Docker Web Service)
+  # ─────────────────────────────────────────
+  - type: web
+    name: brimstone-dashboard
+    env: docker
+    dockerfilePath: ./dashboard/Dockerfile
+    dockerContext: ./dashboard
+    plan: starter
+    autoDeploy: true
+    pullRequestPreviewsEnabled: false
+    healthCheckPath: /
+    envVars:
+      - key: APP_NAME
+        value: BrimStone
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: false
+      - key: APP_URL
+        sync: false
+      - key: APP_KEY
+        generateValue: true
+      - key: TEMPLATE
+        value: bento
+      - key: USE_VITE
+        value: ""
+      # Database — Aiven MySQL
+      - key: DB_CONNECTION
+        value: mysql
+      - key: DB_HOST
+        sync: false
+      - key: DB_PORT
+        sync: false
+      - key: DB_DATABASE
+        sync: false
+      - key: DB_USERNAME
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
+      - key: DB_SSL_CA
+        sync: false
+      # Session & Cache
+      - key: SESSION_DRIVER
+        value: file
+      - key: CACHE_STORE
+        value: file
+      - key: QUEUE_CONNECTION
+        value: sync
+      - key: FILESYSTEM_DISK
+        value: local
+      # Mail
+      - key: MAIL_MAILER
+        value: smtp
+      - key: MAIL_HOST
+        sync: false
+      - key: MAIL_PORT
+        sync: false
+      - key: MAIL_USERNAME
+        sync: false
+      - key: MAIL_PASSWORD
+        sync: false
+      - key: MAIL_FROM_ADDRESS
+        sync: false
+      - key: MAIL_FROM_NAME
+        value: BrimStone
+      # Other
+      - key: SEARCH_ENGINE_INDEXING
+        value: true
+      - key: NOCAPTCHA_SECRET
+        sync: false
+      - key: NOCAPTCHA_SITEKEY
+        sync: false
